@@ -249,6 +249,7 @@ function processItem(item, options, processDone) {
     fse.mkdirsSync(clientLibPath);
 
     // write configuration JSON
+    console.log("Write node configuration: "+(item.type === "json") ? "json" : "xml");
     if(item.mode === 'json') {
       writeClientLibJson(item);
     } else {
