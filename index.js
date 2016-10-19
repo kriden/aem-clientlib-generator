@@ -122,6 +122,27 @@ function writeClientLibJson(item) {
   fse.writeJsonSync(jsonFile, content, {spaces: 2});
 }
 
+function writeClientLibVltContentXml(item) {
+  var content = '<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          jcr:primaryType="cq:ClientLibraryFolder"
+          categories="['+item.name+']';
+
+  if (item.embed) {
+    var embedString = item.embed.join(',');
+    content += 'embed="['+embedString+']"';
+  }
+
+  if (item.dependencies) {
+    var dependenciesString = item.dependencies.join(',');
+    content += 'embed="['+dependenciesString+']"';
+  }
+
+  var contentXml = path.join(item.path, item.name + "/.content.xml");
+  content += "/>";
+  fse.writeFileSync(jsonFile, content);
+}
+
 /**
  * Iterate through the given array of clientlib configuration objects and
  * process them asynchronously.
@@ -228,7 +249,11 @@ function processItem(item, options, processDone) {
     fse.mkdirsSync(clientLibPath);
 
     // write configuration JSON
-    writeClientLibJson(item);
+    if(item.mode === 'json') {
+      writeClientLibJson(item);
+    } else {
+      writeClientLibVltContentXml(item);
+    }
 
     var assetList = normalizeAssets(clientLibPath, item.assets);
 
