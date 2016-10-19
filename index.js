@@ -138,8 +138,8 @@ function writeClientLibVltContentXml(item) {
     content += 'embed="['+dependenciesString+']"';
   }
 
-  var contentXml = path.join(item.path, item.name + "/.content.xml");
   content += "/>";
+  var contentXml = path.join(item.path, item.name + "/.content.xml");
   fse.writeFileSync(contentXml, content);
 }
 
@@ -249,8 +249,9 @@ function processItem(item, options, processDone) {
     fse.mkdirsSync(clientLibPath);
 
     // write configuration JSON
-    console.log("Write node configuration: "+(item.type === "json") ? "json" : "xml");
-    if(item.mode === 'json') {
+    var type = (item.packageType === "jcr") ? "jcr" : "vlt";
+    console.log("Write node configuration: "+type);
+    if(type === 'jcr') {
       writeClientLibJson(item);
     } else {
       writeClientLibVltContentXml(item);
