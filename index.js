@@ -140,7 +140,7 @@ function writeClientLibVltContentXml(item) {
 
   var contentXml = path.join(item.path, item.name + "/.content.xml");
   content += "/>";
-  fse.writeFileSync(jsonFile, content);
+  fse.writeFileSync(contentXml, content);
 }
 
 /**
