@@ -125,17 +125,17 @@ function writeClientLibJson(item) {
 function writeClientLibVltContentXml(item) {
   var content = '<?xml version="1.0" encoding="UTF-8"?>'
   content += '<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"';
-  content += 'jcr:primaryType="cq:ClientLibraryFolder"';
-  content += 'categories="['+item.name+']';
+  content += ' jcr:primaryType="cq:ClientLibraryFolder"';
+  content += ' categories="['+item.name+']"';
 
   if (item.embed) {
     var embedString = item.embed.join(',');
-    content += 'embed="['+embedString+']"';
+    content += '\n embed="['+embedString+']"';
   }
 
   if (item.dependencies) {
     var dependenciesString = item.dependencies.join(',');
-    content += 'embed="['+dependenciesString+']"';
+    content += '\n embed="['+dependenciesString+']"';
   }
 
   content += "/>";
