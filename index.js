@@ -129,6 +129,7 @@ function writeClientLibVltContentXml(item) {
 
   if(item.categories) {
     var categoriesString = item.categories.join(',');
+    console.log("Adding multiple categories: "+categoriesString);
     content += ' categories="['+categoriesString+']"';
   } else {
     content += ' categories="['+item.name+']" ';
