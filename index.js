@@ -127,11 +127,11 @@ function writeClientLibVltContentXml(item) {
   content += '<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"';
   content += ' jcr:primaryType="cq:ClientLibraryFolder" ';
 
-  if(!item.categories) {
-    content += ' categories="['+item.name+']" ';
-  } else {
+  if(item.categories) {
     var categoriesString = item.categories.join(',');
     content += ' categories="['+categoriesString+']"';
+  } else {
+    content += ' categories="['+item.name+']" ';
   }
 
   if (item.embed) {
